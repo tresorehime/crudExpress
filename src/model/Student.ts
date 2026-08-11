@@ -1,19 +1,19 @@
 export interface Student {
     id: string,
-    firstName: string,
-    lastName: string,
+    firstname: string,
+    lastname: string,
     mail: string,
     phone: string
 }
 
 export interface CreateStudent {
-    firstName: string,
-    lastName: string,
+    firstname: string,
+    lastname: string,
     mail: string
 }
 
 export interface UpdateStudent {
-    firstName?: string,
-    lastName?: string,
+    firstname?: string,
+    lastname?: string,
     mail?: string
 }
