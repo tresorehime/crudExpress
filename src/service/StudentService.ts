@@ -11,12 +11,12 @@ export class StudentService {
         return this.studentRepository.findAll();
     }
     async getStudentsById (id:number){
-        const student = this.studentRepository.findById(id);
+        const student = await this.studentRepository.findById(id);
         if (!student){throw new Error("student not found")};
       return student;
     }
     async deleteStudent (id:number){
-        const student = this.studentRepository.findById(id);
+        const student = await this.studentRepository.findById(id);
         if (!student){throw new Error("student not found")};
         await this.studentRepository.delete(id);
         return student;
