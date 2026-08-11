@@ -23,7 +23,7 @@ export class StudentRepository {
     }
 
     async update (id:number,data:UpdateStudent): Promise<Student | null> {
-        const result = await pool.query <Student> (
+        const result  = await pool.query <Student> (
             'UPDATE student SET firstName = $1, lastname = $2, mail = $3 WHERE id = $4 RETURNING *',
             [data.firstname,data.lastname, data.mail, id]
         );
