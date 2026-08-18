@@ -1,4 +1,5 @@
 import {UserRepo} from "../repository/UserRepo";
+import {generateToken} from "../Security/jwt";
 
 export class UserService{
     private userRepo:UserRepo;
@@ -32,6 +33,7 @@ export class UserService{
         if (existingUser.password !== password) {
             throw new Error("Mot de passe incorrect");
         }
-        return existingUser;
+        const token = generateToken(Number(existingUser.id));
+        return token;
     }
 }

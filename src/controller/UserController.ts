@@ -54,14 +54,14 @@ export class UserController{
         }
 
         try {
-            const user = await this.userService.login(
+            const token = await this.userService.login(
                 email,
                 password
             );
 
             res.status(200).json({
                 message: "Connexion réussie",
-                user
+                token
             });
 
         } catch (err) {
