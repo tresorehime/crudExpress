@@ -1,0 +1,29 @@
+{
+  "name": "crudexpress",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.ts"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^17.4.2",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "~1.9.1",
+    "pg": "^8.23.0",
+    "pug": "2.0.0-beta11"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.2.0",
+    "@types/pg": "^8.21.0",
+    "ts-node": "^10.9.2",
+    "typescript": "5.4"
+  }
+}
