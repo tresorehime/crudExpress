@@ -1,5 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 import { verifyToken } from "../Security/jwt";
+import { AuthenticatedUser, Role } from "../model/User";
+
+
+declare global {
+    namespace Express {
+        interface Locals {
+            user: AuthenticatedUser;
+        }
+    }
+}
 
 export function authMiddleware(
     req: Request,
@@ -36,4 +46,16 @@ export function authMiddleware(
             message: "Token invalide ou expiré"
         });
     }
+    export const authorize =
+        (...roles: Role[]) =>
+            (req: Request, res: Response, next: NextFunction) => {
+                if (!res.locals.user || !roles.includes(res.locals.user.role)) {
+                    res.status(403).json({
+                        message: "Permissions insuffisantes"
+                    });
+                    return;
+                }
+
+                next();
+            };
 }
