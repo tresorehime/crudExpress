@@ -1,3 +1,5 @@
+export type Role = 'ADMIN' | 'STUDENT';
+
 export interface User {
     id: string;
     email: string;
@@ -8,4 +10,10 @@ export interface User {
 export interface CreateUser {
     email: string;
     password: string;
+}
+
+export interface AuthenticatedUser {
+    id: number;
+    email: string;
+    role: string;
 }
