@@ -1,4 +1,5 @@
-import jwt from "jsonwebtoken";
+import jwt, { SignOptions } from "jsonwebtoken";
+import dotenv from "dotenv";
 import {AuthenticatedUser} from "../model/User";
 
 dotenv.config();
@@ -9,8 +10,8 @@ const EXPIRES_IN = (process.env.JWT_EXPIRES_IN || '1h') as SignOptions['expiresI
 if (!SECRET) throw new Error('JWT_SECRET is required in the environment');
 
 
-export const signAccessToken = (user: AuthenticatedUser): string =>
-    jwt.sign(user, secret, { expiresIn: EXPIRES_IN });
+export const generateToken = (user: AuthenticatedUser): string =>
+    jwt.sign(user, SECRET, { expiresIn: EXPIRES_IN });
 
 
 export function verifyToken(token: string) {
