@@ -1,39 +1,43 @@
 import {UserRepo} from "../repository/UserRepo";
 import {generateToken} from "../Security/jwt";
 
-export class UserService{
-    private userRepo:UserRepo;
+export class UserService {
+    private userRepo: UserRepo;
 
 
     constructor(userRepo: UserRepo) {
         this.userRepo = userRepo;
     }
 
-    async createUser (email:string, password: string){
-        const existingUser = await  this.userRepo.findByEmail(email);
+    async createUser(email: string, password: string) {
+        const existingUser = await this.userRepo.findByEmail(email);
 
-        if (existingUser){
+        if (existingUser) {
             throw new Error("Email déjà utilisé");
         }
 
-        return await  this.userRepo.create({
+        return await this.userRepo.create({
                 email,
                 password
-        }
+            }
         );
     }
 
-    async login  (email:string, password: string){
-        const existingUser = await  this.userRepo.findByEmail(email);
+    async login(email: string, password: string) {
+        const existingUser = await this.userRepo.findByEmail(email);
 
-        if (!existingUser){
+        if (!existingUser) {
             throw new Error("Email ou mot de passe incorrect");
         }
 
         if (existingUser.password !== password) {
             throw new Error("Mot de passe incorrect");
         }
-        const token = generateToken(Number(existingUser.id));
+        const token = generateToken({
+            id: Number(existingUser.id),
+            email: existingUser.email,
+            role: "STUDENT"
+        });
         return token;
     }
 }
