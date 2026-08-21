@@ -46,10 +46,11 @@ export function authMiddleware(
             message: "Token invalide ou expiré"
         });
     }
+}
     export const authorize =
         (...roles: Role[]) =>
             (req: Request, res: Response, next: NextFunction) => {
-                if (!res.locals.user || !roles.includes(res.locals.user.role)) {
+                if (!res.locals.user || !roles.includes(res.locals.user.role as Role)) {
                     res.status(403).json({
                         message: "Permissions insuffisantes"
                     });
@@ -58,4 +59,3 @@ export function authMiddleware(
 
                 next();
             };
-}
